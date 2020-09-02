@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Budget_Portal.Enums;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,7 +39,7 @@ namespace Budget_Portal.Models
 
         public virtual ICollection<Transaction> Transactions { get; set; }
 
-        //public AccountType AccountType { get; set; }
+        public AccountType AccountType { get; set; }
 
         public BankAccount(decimal startingBalance, decimal warningBalance, string accountName)
         {

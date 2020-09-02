@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Budget_Portal.Enums;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,7 +27,7 @@ namespace Budget_Portal.Models
 
         public  virtual ApplicationUser Owner { get; set; }
 
-        // public TransactionType TransactionType { get; set; }
+        public TransactionType TransactionType { get; set; }
 
         public DateTime Created { get; set; }
 
