@@ -77,5 +77,19 @@ namespace Budget_Portal.Models
         }
 
         public DbSet<BudgetItem> BudgetItems {get; set; }
+
+        public System.Data.Entity.DbSet<Budget_Portal.Models.BankAccount> BankAccounts { get; set; }
+
+        public System.Data.Entity.DbSet<Budget_Portal.Models.HouseHold> HouseHolds { get; set; }
+
+        public System.Data.Entity.DbSet<Budget_Portal.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        public System.Data.Entity.DbSet<Budget_Portal.Models.Budget> Budgets { get; set; }
+
+        public System.Data.Entity.DbSet<Budget_Portal.Models.Invitation> Invitations { get; set; }
+
+        public System.Data.Entity.DbSet<Budget_Portal.Models.Notification> Notifications { get; set; }
+
+        public System.Data.Entity.DbSet<Budget_Portal.Models.Transaction> Transactions { get; set; }
     }
 }
