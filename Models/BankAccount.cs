@@ -39,6 +39,7 @@ namespace Budget_Portal.Models
 
         public virtual ICollection<Transaction> Transactions { get; set; }
 
+        [Display(Name = "Account Type")]
         public AccountType AccountType { get; set; }
 
         public BankAccount(decimal startingBalance, decimal warningBalance, string accountName)
