@@ -40,7 +40,7 @@ namespace Budget_Portal.Controllers
         public ActionResult Create()
         {
             ViewBag.HouseHoldId = new SelectList(db.HouseHolds, "Id", "HouseholdName");
-            ViewBag.OwnerId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
+            ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace Budget_Portal.Controllers
             }
 
             ViewBag.HouseHoldId = new SelectList(db.HouseHolds, "Id", "HouseholdName", budget.HouseHoldId);
-            ViewBag.OwnerId = new SelectList(db.ApplicationUsers, "Id", "FirstName", budget.OwnerId);
+            ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName", budget.OwnerId);
             return View(budget);
         }
 
@@ -76,7 +76,7 @@ namespace Budget_Portal.Controllers
                 return HttpNotFound();
             }
             ViewBag.HouseHoldId = new SelectList(db.HouseHolds, "Id", "HouseholdName", budget.HouseHoldId);
-            ViewBag.OwnerId = new SelectList(db.ApplicationUsers, "Id", "FirstName", budget.OwnerId);
+            ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName", budget.OwnerId);
             return View(budget);
         }
 
@@ -94,7 +94,7 @@ namespace Budget_Portal.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.HouseHoldId = new SelectList(db.HouseHolds, "Id", "HouseholdName", budget.HouseHoldId);
-            ViewBag.OwnerId = new SelectList(db.ApplicationUsers, "Id", "FirstName", budget.OwnerId);
+            ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName", budget.OwnerId);
             return View(budget);
         }
 

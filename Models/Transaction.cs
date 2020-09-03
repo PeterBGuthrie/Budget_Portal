@@ -17,15 +17,15 @@ namespace Budget_Portal.Models
         [Display(Name = "Bank Account")]
         public int AccountId { get; set; }
 
-        public virtual BankAccount BankAccount { get; set; }
+        public virtual BankAccount Account { get; set; }
 
         public int? BudgetItemId { get; set; }
 
         public virtual BudgetItem BudgetItem { get; set; }
 
-        public string  OwnerId { get; set; }
+        public string OwnerId { get; set; }
 
-        public  virtual ApplicationUser Owner { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
 
         public TransactionType TransactionType { get; set; }
 
@@ -37,14 +37,14 @@ namespace Budget_Portal.Models
         public string Memo { get; set; }
 
         [Display(Name = "Delete Transaction")]
-        public  bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
-    public Transaction()
-    {
+        public Transaction()
+        {
             Created = DateTime.Now;
             OwnerId = HttpContext.Current.User.Identity.GetUserId();
 
-    }
+        }
 
 
 

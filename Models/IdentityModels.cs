@@ -82,8 +82,6 @@ namespace Budget_Portal.Models
 
         public System.Data.Entity.DbSet<Budget_Portal.Models.HouseHold> HouseHolds { get; set; }
 
-        public System.Data.Entity.DbSet<Budget_Portal.Models.ApplicationUser> ApplicationUsers { get; set; }
-
         public System.Data.Entity.DbSet<Budget_Portal.Models.Budget> Budgets { get; set; }
 
         public System.Data.Entity.DbSet<Budget_Portal.Models.Invitation> Invitations { get; set; }
