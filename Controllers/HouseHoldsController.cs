@@ -4,15 +4,20 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Budget_Portal.Extensions;
+using Budget_Portal.Helpers;
 using Budget_Portal.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Budget_Portal.Controllers
 {
     public class HouseHoldsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private RoleHelper roleHelper = new RoleHelper();
 
         // GET: HouseHolds
         public ActionResult Index()
@@ -46,12 +51,21 @@ namespace Budget_Portal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,HouseholdName,Greeting,Created,IsDeleted")] HouseHold houseHold)
+        public async Task<ActionResult> Create([Bind(Include = "Id,HouseholdName,Greeting")] HouseHold houseHold)
         {
             if (ModelState.IsValid)
             {
+                houseHold.Created = DateTime.Now;
                 db.HouseHolds.Add(houseHold);
                 db.SaveChanges();
+
+                var user = db.Users.Find(User.Identity.GetUserId());
+                user.HouseholdId = houseHold.Id;
+                roleHelper.UpdateUserRole(user.Id, "Head");
+                db.SaveChanges();
+
+                await AuthorizeExtensions.RefreshAuthentication(HttpContext, user);
+
                 return RedirectToAction("Index");
             }
 

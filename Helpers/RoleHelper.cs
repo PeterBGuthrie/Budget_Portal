@@ -33,6 +33,20 @@ namespace Budget_Portal.Helpers
             return result.Succeeded;
         }
 
+        // This method makes sure the user is only occupying one role at time
+        public bool UpdateUserRole(string userId, string roleName)
+        {
+            var currentRoles = ListUserRoles(userId);
+            if(currentRoles.Count != 0)
+            {
+                foreach(var role in currentRoles)
+                {
+                    RemoveUserFromRole(userId, role);
+                }
+            }
+            return AddUserToRole(userId, roleName);
+        }
+
         public ICollection<ApplicationUser> UsersInRole(string roleName)
         {
             var resultList = new List<ApplicationUser>();

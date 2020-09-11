@@ -59,6 +59,10 @@ namespace Budget_Portal.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            var hhId = HouseholdId != null ? HouseholdId.ToString() : "";
+            userIdentity.AddClaim(new Claim("HouseholdId", hhId));
+            userIdentity.AddClaim(new Claim("FullName", FullName));
+            userIdentity.AddClaim(new Claim("FullName", AvatarPath));
             // Add custom user claims here
             return userIdentity;
         }

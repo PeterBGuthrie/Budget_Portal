@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Budget_Portal.Models;
+using Budget_Portal.Extensions;
 
 namespace Budget_Portal.Controllers
 {
@@ -15,6 +16,7 @@ namespace Budget_Portal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -32,9 +34,9 @@ namespace Budget_Portal.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -242,6 +244,26 @@ namespace Budget_Portal.Controllers
             }
             AddErrors(result);
             return View(model);
+        }
+
+        // Get: /Manage/UpdateProfile
+        public ActionResult UpdateProfile()
+        {
+            var user = db.Users.Find(User.Identity.GetUserId());
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateProfile(ApplicationUser model)
+        {
+            var user = db.Users.Find(model.Id);
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            db.SaveChanges();
+
+            await AuthorizeExtensions.RefreshAuthentication(HttpContext, user);
+            return RedirectToAction("UpdateProfile");
         }
 
         //

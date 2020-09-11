@@ -1,4 +1,5 @@
 ﻿using Budget_Portal.Enums;
+using Budget_Portal.Extensions;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -51,6 +52,7 @@ namespace Budget_Portal.Models
             Created = DateTime.Now;
             AccountName = accountName;
             OwnerId = HttpContext.Current.User.Identity.GetUserId();
+            HouseHoldId = (int) HttpContext.Current.User.Identity.GetHouseholdId();
 
         }
 
