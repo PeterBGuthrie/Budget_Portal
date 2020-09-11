@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Budget_Portal.Models;
 using Budget_Portal.Extensions;
+using Budget_Portal.ViewModels;
 
 namespace Budget_Portal.Controllers
 {
@@ -250,12 +251,13 @@ namespace Budget_Portal.Controllers
         public ActionResult UpdateProfile()
         {
             var user = db.Users.Find(User.Identity.GetUserId());
-            return View(user);
+            var model = new UpdateProfileVm(user);
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UpdateProfile(ApplicationUser model)
+        public async Task<ActionResult> UpdateProfile(UpdateProfileVm model)
         {
             var user = db.Users.Find(model.Id);
             user.FirstName = model.FirstName;
